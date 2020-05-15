@@ -30,7 +30,7 @@ public class SpringSchedStarterApp {
 	 * II.
 	 * 
 	 * param : fixedDelayString enables to command the scheduler to run on specific
-	 * intervals mins hours in readable String format vs milliseconds 
+	 * intervals seconds, mins, hours in readable String format vs milliseconds 
 	 * "PT10S <-- run every 10 seconds 
 	 * "PT5M  <-- run every 5 minutes 
 	 * "PT1H  <-- run every 1 hour
@@ -46,9 +46,8 @@ public class SpringSchedStarterApp {
 	 * @fixedRate execution will NOT overlap but will execute immediately after the currently
 	 * running instance of the method is finished 
 	 *  
-	 * @initialDelay The task will be
-	 * executed a first time after the initialDelay value – and it will continue to
-	 * be executed according to the fixedDelay.
+	 * @initialDelay The task will be executed a first time after the initialDelay value,
+	 * succeeding executions will be executed according to the fixedDelay.
 	 */
 	private static int i = 0;
 
@@ -62,8 +61,8 @@ public class SpringSchedStarterApp {
 	/**
 	 * IV.
 	 * 
-	 * You can set the delay, rate values in an external properties file
-	 * by using Spring Expressions "${x.y.z}"
+	 * You can set the delay, rate values in an external propertiey file
+	 * and fetch the data using Spring Expressions "${x.y.z}"
 	 */
 	@Scheduled(fixedDelayString = "${sched.delay.rule1}")
 	void startFixedDelayStringByPropertiesFile() {
@@ -75,7 +74,7 @@ public class SpringSchedStarterApp {
 	 * 
 	 * you can use cron expressions for complex detailed schedules and timings
 	 * "* * * * * *" = seconds minutes hour dayOfTheMonth month dayOfTheWeek	 * 
-	 * startCronSchedule method below will execute every 15mins, between 8am - 5pm, on weekdays only  
+	 * The startCronSchedule() method below will execute every 15mins, between 8am - 5pm, on weekdays only  
 	 *        
 	 */			
 			
@@ -87,8 +86,8 @@ public class SpringSchedStarterApp {
 	/**
 	 * VI.
 	 * 
-	 * you can also use data from properties file for the cron expression
-	 * You can use as cron resources : https://crontab.guru/
+	 * you can also use data from a property file for the cron expression
+	 * https://crontab.guru/  <- is a good resource to learn and validate cron expressions
 	 */
 	@Scheduled(cron = "${sched.cron.weekend1}")
 	void startCronScheduleFromPropertiesFile() {
